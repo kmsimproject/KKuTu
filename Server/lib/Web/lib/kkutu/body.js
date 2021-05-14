@@ -16,11 +16,15 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var spamWarning = 0;
-var spamCount = 0;
+var spamWarning = 0, spamCount = 0, CF = 1;
 // var smile = 94, tag = 35;
 
 function zeroPadding(num, len){ var s = num.toString(); return "000000000000000".slice(0, Math.max(0, len - s.length)) + s; }
+function pub(a){
+	var a = JSON.stringify({ type: a });
+	if(rws) rws.send(a);
+	ws.send(a);
+}
 function send(type, data, toMaster){
 	var i, r = { type: type };
 	var subj = toMaster ? ws : (rws || ws);
@@ -146,7 +150,7 @@ function route(func, a0, a1, a2, a3, a4){
 }
 function connectToRoom(chan, rid){
 	var url = $data.URL.replace(/:(\d+)/, function(v, p1){
-		return ":" + (Number(p1) + 416 + Number(chan) - 1);
+		return ":" + (Number(p1) + (CF ? 30 : 416) + Number(chan) - 1);
 	}) + "&" + chan + "&" + rid;
 	
 	if(rws) return;
@@ -243,6 +247,9 @@ function onMessage(data){
 			welcome();
 			if(data.caj) checkAge();
 			updateCommunity();
+			_setInterval(function(){
+				if(ws.readyState) pub('refresh');
+			}, 18000);
 			break;
 		case 'conn':
 			$data.setUser(data.user.id, data.user);
