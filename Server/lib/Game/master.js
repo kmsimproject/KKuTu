@@ -77,6 +77,12 @@ function processAdmin(id, value){
 		return p2;
 	});
 	switch(cmd){
+		case "serverdown":
+			KKuTu.publish('yell', { value: "곧 서버가 닫힙니다." });
+			return null;
+		case "serverestart":
+			KKuTu.publish('yell', { value: "곧 서버가 재시작 됩니다." });
+			return null;
 		case "yell":
 			KKuTu.publish('yell', { value: value });
 			return null;
