@@ -115,7 +115,6 @@ block Middle
 			+SettingOption('only-unlock', L('onlyUnlock'), "width: 200px;")
 		div.dialog-bar.tail-button
 			button#setting-ok= L('save')
-			button#setting-server= L('changeServer')
 	+Dialog('CommunityDiag', 300, 300)
 		div.dialog-bar(style='height: 225px; overflow-y: scroll;')
 			div#comm-friends
@@ -153,7 +152,7 @@ block Middle
 	+Dialog('RoomDiag', 300, 375)
 		div.dialog-bar
 			h4= L('roomTitle')
-			input#room-title(placeholder=(nick || L('guest'))+L('roomDefault'), maxlength=20)
+			input#room-title(placeholder=(nick || L('guest'))+('님이 처음 만드신 방'), maxlength=20)
 		div.dialog-bar
 			h4= L('password')
 			input#room-pw(type='password', placeholder=L('password'), maxlength=20)
@@ -190,9 +189,9 @@ block Middle
 			select#room-time
 				option(value=10, style='color: #FF4444')
 				option(value=30)
-				option(value=60, selected)
+				option(value=60)
 				option(value=90)
-				option(value=120)
+				option(value=120, selected)
 				option(value=150)
 		div.dialog-bar(style='height: 59px;')
 			h4(style='height: 45px;')= L('misc')
