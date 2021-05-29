@@ -1438,7 +1438,7 @@ function getRewards(mode, score, bonus, rank, all, ss){
 			rw.score += score * 10.0;
 			break;
 		case 'ESS':
-			rw.score += score * 10.0;
+			rw.score += score * 1.0;
 			break;
 		default:
 			break;
